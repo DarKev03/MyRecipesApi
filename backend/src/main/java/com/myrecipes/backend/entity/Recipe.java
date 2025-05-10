@@ -1,9 +1,7 @@
-package com.entity;
+package com.myrecipes.backend.entity;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-
-import org.aspectj.apache.bcel.generic.Instruction;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

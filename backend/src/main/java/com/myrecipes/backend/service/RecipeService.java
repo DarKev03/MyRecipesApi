@@ -1,12 +1,12 @@
-package com.service;
+package com.myrecipes.backend.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.entity.Recipe;
-import com.repository.RecipeRepository;
+import com.myrecipes.backend.entity.Recipe;
+import com.myrecipes.backend.repository.RecipeRepository;
 
 @Service
 public class RecipeService {

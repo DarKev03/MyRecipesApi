@@ -1,10 +1,10 @@
-package com.repository;
+package com.myrecipes.backend.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.entity.Recipe;
+import com.myrecipes.backend.entity.Recipe;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     // Custom query to find recipes by user ID

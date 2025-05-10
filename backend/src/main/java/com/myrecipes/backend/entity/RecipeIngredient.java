@@ -1,9 +1,5 @@
-package com.entity;
+package com.myrecipes.backend.entity;
 
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,25 +11,20 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "recipe_calendar")
-public class RecipeCalendar {
+@Table(name = "recipe_ingredient")
+public class RecipeIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
-    @Column(name = "scheduled_date")
-    private LocalDate scheduledDate;
+    @ManyToOne
+    @JoinColumn(name = "ingredient_id", nullable = false)
+    private Ingredient ingredient;
 
-    private String notes;
-
-    @Column(name = "created_at")
-    private OffsetDateTime createdAt = OffsetDateTime.now();
+    private Double quantity;
+    private String unit;
 }

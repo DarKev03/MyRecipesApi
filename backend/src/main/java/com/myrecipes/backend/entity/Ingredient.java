@@ -1,4 +1,4 @@
-package com.entity;
+package com.myrecipes.backend.entity;
 
 import java.time.OffsetDateTime;
 import java.util.List;

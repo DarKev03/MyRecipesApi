@@ -1,4 +1,4 @@
-package com.entity;
+package com.myrecipes.backend.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,15 +11,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "recipe_ingredient")
-public class RecipeIngredient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "shopping_list_items")
+public class ShoppingListItem {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id", nullable = false)
-    private Recipe recipe;
+    @JoinColumn(name = "shopping_list_id", nullable = false)
+    private ShoppingList shoppingList;
 
     @ManyToOne
     @JoinColumn(name = "ingredient_id", nullable = false)

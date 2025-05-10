@@ -1,28 +1,30 @@
-package com.service;
+package com.myrecipes.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.entity.User;
-import com.repository.UserRepository;
+import com.myrecipes.backend.entity.User;
+import com.myrecipes.backend.repository.UserRepository;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public Optional <User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         userRepository.save(user);
+        return user;
     }
 
     public void updateUser(Long id, User user) {
