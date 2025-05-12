@@ -22,9 +22,6 @@ public class Instruction {
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
-    @Column(name = "step_number", nullable = false)
-    private Integer stepNumber;
-
     @Column(nullable = false, columnDefinition = "TEXT")
     private String text;
 
