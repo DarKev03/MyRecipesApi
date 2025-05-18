@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myrecipes.backend.dto.RecipeCalendarDTO;
 import com.myrecipes.backend.entity.RecipeCalendar;
 import com.myrecipes.backend.service.RecipeCalendarService;
 
@@ -26,7 +27,7 @@ public class RecipeCalendarController {
     }
 
     @GetMapping
-    public List<RecipeCalendar> getAll() {
+    public List<RecipeCalendarDTO> getAll() {
         return service.getAll();
     }
 

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.UserDTO;
 import com.myrecipes.backend.entity.User;
 import com.myrecipes.backend.repository.UserRepository;
 
@@ -14,31 +15,29 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional <User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public Optional<UserDTO> getUserById(Long id) {
+        return userRepository.findById(id).map(UserDTO::new);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(UserDTO::new)
+                .toList();
     }
 
-    public User saveUser(User user) {
-        userRepository.save(user);
-        return user;
+    public UserDTO saveUser(User user) {
+        return new UserDTO(userRepository.save(user));
     }
 
-    public void updateUser(Long id, User user) {
-        if (userRepository.existsById(id)) {
+    public Optional<UserDTO> updateUser(Long id, User user) {
+        return userRepository.findById(id).map(existing -> {
             user.setId(id);
-            user.setEmail(user.getEmail());
-            user.setPassword(user.getPassword());
-            user.setAdmin(user.isAdmin());
-            user.setName(user.getName());            
-            userRepository.save(user);
-        }
+            return new UserDTO(userRepository.save(user));
+        });
     }
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
 }

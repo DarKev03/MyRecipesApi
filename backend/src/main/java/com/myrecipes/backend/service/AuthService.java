@@ -2,6 +2,7 @@ package com.myrecipes.backend.service;
 
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.UserDTO;
 import com.myrecipes.backend.entity.User;
 import com.myrecipes.backend.repository.UserRepository;
 
@@ -13,7 +14,7 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public User login(String email, String password) {
+    public UserDTO login(String email, String password) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Email no encontrado"));
 
@@ -21,13 +22,14 @@ public class AuthService {
             throw new RuntimeException("Contraseña incorrecta");
         }
 
-        return user;
+        return new UserDTO(user);
     }
 
-    public User register(User user) {
+    public UserDTO register(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("El email ya está registrado");
         }
-        return userRepository.save(user);
+        return new UserDTO(userRepository.save(user));
     }
+
 }

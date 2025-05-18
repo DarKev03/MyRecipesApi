@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myrecipes.backend.dto.ShoppingListItemDTO;
 import com.myrecipes.backend.entity.ShoppingListItem;
 import com.myrecipes.backend.service.ShoppingListItemService;
 
@@ -26,7 +27,7 @@ public class ShoppingListItemController {
     }
 
     @GetMapping
-    public List<ShoppingListItem> getAll() {
+    public List<ShoppingListItemDTO> getAll() {
         return service.getAll();
     }
 
