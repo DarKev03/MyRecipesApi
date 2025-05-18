@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myrecipes.backend.dto.RecipeDTO;
 import com.myrecipes.backend.entity.Recipe;
 import com.myrecipes.backend.service.RecipeService;
 
@@ -27,13 +28,18 @@ public class RecipeController {
     }
 
     @GetMapping
-    public List<Recipe> getAllRecipes() {
+    public List<RecipeDTO> getAllRecipes() {
         return recipeService.getAllRecipes();
     }
 
     @GetMapping("/{id}")
-    public Optional<Recipe> getRecipeById(@PathVariable Long id) {
+    public Optional<RecipeDTO> getRecipeById(@PathVariable Long id) {
         return recipeService.getRecipeById(id);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<RecipeDTO> getRecipesByUserId(@PathVariable Long userId) {
+        return recipeService.getRecipesByUserId(userId);
     }
 
     @PostMapping

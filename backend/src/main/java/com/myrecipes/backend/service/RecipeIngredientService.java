@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.RecipeIngredientDTO;
 import com.myrecipes.backend.entity.RecipeIngredient;
 import com.myrecipes.backend.repository.RecipeIngredientRepository;
 
@@ -15,9 +16,12 @@ public class RecipeIngredientService {
         this.recipeIngredientRepository = recipeIngredientRepository;
     }
 
-    public List<RecipeIngredient> getAll() {
-        return recipeIngredientRepository.findAll();
+    public List<RecipeIngredientDTO> getByRecipeId(Long recipeId) {
+        return recipeIngredientRepository.findByRecipeId(recipeId).stream()
+            .map(RecipeIngredientDTO::new)
+            .toList();
     }
+    
 
     public RecipeIngredient save(RecipeIngredient ri) {
         return recipeIngredientRepository.save(ri);

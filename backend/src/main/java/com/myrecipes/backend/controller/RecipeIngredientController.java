@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myrecipes.backend.dto.RecipeIngredientDTO;
 import com.myrecipes.backend.entity.RecipeIngredient;
 import com.myrecipes.backend.service.RecipeIngredientService;
 
@@ -25,9 +26,9 @@ public class RecipeIngredientController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<RecipeIngredient> getAll() {
-        return service.getAll();
+    @GetMapping("/{recipeId}")
+    public List<RecipeIngredientDTO> getAll(@PathVariable Long recipeId) {
+        return service.getByRecipeId(recipeId);
     }
 
     @PostMapping

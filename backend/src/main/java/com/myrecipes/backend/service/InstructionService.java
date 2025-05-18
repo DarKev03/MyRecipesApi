@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.InstructionDTO;
 import com.myrecipes.backend.entity.Instruction;
 import com.myrecipes.backend.repository.InstructionRepository;
 
@@ -16,16 +17,20 @@ public class InstructionService {
         this.instructionRepository = instructionRepository;
     }
 
-    public List<Instruction> getAllInstructions() {
-        return instructionRepository.findAll();
+    public List<InstructionDTO> getAllInstructions() {
+        return instructionRepository.findAll().stream()
+                .map(InstructionDTO::new)
+                .toList();
     }
 
-    public Optional<Instruction> getInstructionsById(Long id) {
-        return instructionRepository.findById(id);
+    public Optional<InstructionDTO> getInstructionsById(Long id) {
+        return instructionRepository.findById(id).map(InstructionDTO::new);
     }
 
-    public List<Instruction> getInstructionsByRecipeId(Long recipeId) {
-        return instructionRepository.findByRecipeId(recipeId);
+    public List<InstructionDTO> getInstructionsByRecipeId(Long recipeId) {
+        return instructionRepository.findByRecipeId(recipeId).stream()
+                .map(InstructionDTO::new)
+                .toList();
     }
 
     public Instruction saveInstruction(Instruction instruction) {

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.IngredientDTO;
 import com.myrecipes.backend.entity.Ingredient;
 import com.myrecipes.backend.repository.IngredientRepository;
 
@@ -16,15 +17,14 @@ public class IngredientService {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public List<Ingredient> getAllIngredients() {
-        return ingredientRepository.findAll();
+    public List<IngredientDTO> getAllIngredients() {
+        return ingredientRepository.findAll().stream()
+                .map(IngredientDTO::new)
+                .toList();
     }
 
-    public Optional<Ingredient> getIngredientById(Long id) {
-        if (!ingredientRepository.existsById(id)) {
-            return Optional.empty();
-        }
-        return ingredientRepository.findById(id);
+    public Optional<IngredientDTO> getIngredientById(Long id) {
+        return ingredientRepository.findById(id).map(IngredientDTO::new);
     }
 
     public Ingredient saveIngredient(Ingredient ingredient) {

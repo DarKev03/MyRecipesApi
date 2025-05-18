@@ -46,6 +46,9 @@ public class Recipe {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "is_favorite")
+    private boolean isFavorite;
+
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private List<RecipeIngredient> ingredients;
 

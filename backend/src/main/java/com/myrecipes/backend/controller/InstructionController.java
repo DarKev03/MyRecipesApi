@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myrecipes.backend.dto.InstructionDTO;
 import com.myrecipes.backend.entity.Instruction;
 import com.myrecipes.backend.service.InstructionService;
 
@@ -26,7 +27,7 @@ public class InstructionController {
     }
 
     @GetMapping("/recipe/{recipeId}")
-    public List<Instruction> getByRecipe(@PathVariable Long recipeId) {
+    public List<InstructionDTO> getByRecipe(@PathVariable Long recipeId) {
         return instructionService.getInstructionsByRecipeId(recipeId);
     }
 

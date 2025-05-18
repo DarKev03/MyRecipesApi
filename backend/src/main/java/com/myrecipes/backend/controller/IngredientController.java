@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myrecipes.backend.dto.IngredientDTO;
 import com.myrecipes.backend.entity.Ingredient;
 import com.myrecipes.backend.service.IngredientService;
 
@@ -27,12 +28,12 @@ public class IngredientController {
     }
 
     @GetMapping
-    public List<Ingredient> getAllIngredients() {
+    public List<IngredientDTO> getAllIngredients() {
         return ingredientService.getAllIngredients();
     }
 
     @GetMapping("/{id}")
-    public Optional<Ingredient> getIngredientById(@PathVariable Long id) {
+    public Optional<IngredientDTO> getIngredientById(@PathVariable Long id) {
         return ingredientService.getIngredientById(id);
     }
 

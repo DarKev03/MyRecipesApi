@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.RecipeDTO;
 import com.myrecipes.backend.entity.Recipe;
 import com.myrecipes.backend.repository.RecipeRepository;
 
@@ -16,17 +17,21 @@ public class RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
-    public List<Recipe> getAllRecipes() {
-        return recipeRepository.findAll();
+    public List<RecipeDTO> getAllRecipes() {
+        return recipeRepository.findAll().stream()
+                .map(RecipeDTO::new)
+                .toList();
     }
 
-    public Optional<Recipe> getRecipeById(Long id) {
-        return recipeRepository.findById(id);
+    public Optional<RecipeDTO> getRecipeById(Long id) {
+        return recipeRepository.findById(id).map(RecipeDTO::new);
     }
 
-    public List<Recipe> getRecipesByUserId(Long userId) {
-        return recipeRepository.findByUserId(userId);
-    }    
+    public List<RecipeDTO> getRecipesByUserId(Long userId) {
+        return recipeRepository.findByUserId(userId).stream()
+                .map(RecipeDTO::new)
+                .toList();
+    }
 
     public Recipe saveRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);

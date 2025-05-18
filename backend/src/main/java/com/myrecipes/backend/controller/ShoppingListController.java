@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myrecipes.backend.dto.ShoppingListDTO;
 import com.myrecipes.backend.entity.ShoppingList;
 import com.myrecipes.backend.service.ShoppingListService;
 
@@ -27,12 +28,12 @@ public class ShoppingListController {
     }
 
     @GetMapping
-    public List<ShoppingList> getAll() {
+    public List<ShoppingListDTO> getAll() {
         return shoppingListService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<ShoppingList> getById(@PathVariable Long id) {
+    public Optional<ShoppingListDTO> getById(@PathVariable Long id) {
         return shoppingListService.getById(id);
     }
 

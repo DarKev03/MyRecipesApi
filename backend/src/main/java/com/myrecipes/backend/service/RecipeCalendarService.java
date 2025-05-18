@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.RecipeCalendarDTO;
 import com.myrecipes.backend.entity.RecipeCalendar;
 import com.myrecipes.backend.repository.RecipeCalendarRepository;
 
@@ -15,8 +16,10 @@ public class RecipeCalendarService {
         this.calendarRepository = calendarRepository;
     }
 
-    public List<RecipeCalendar> getAll() {
-        return calendarRepository.findAll();
+    public List<RecipeCalendarDTO> getAll() {
+        return calendarRepository.findAll().stream()
+                .map(RecipeCalendarDTO::new)
+                .toList();
     }
 
     public RecipeCalendar save(RecipeCalendar calendar) {

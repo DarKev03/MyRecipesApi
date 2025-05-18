@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.ShoppingListDTO;
 import com.myrecipes.backend.entity.ShoppingList;
 import com.myrecipes.backend.repository.ShoppingListRepository;
 
@@ -16,12 +17,14 @@ public class ShoppingListService {
         this.shoppingListRepository = shoppingListRepository;
     }
 
-    public List<ShoppingList> getAll() {
-        return shoppingListRepository.findAll();
+    public List<ShoppingListDTO> getAll() {
+        return shoppingListRepository.findAll().stream()
+                .map(ShoppingListDTO::new)
+                .toList();
     }
 
-    public Optional<ShoppingList> getById(Long id) {
-        return shoppingListRepository.findById(id);
+    public Optional<ShoppingListDTO> getById(Long id) {
+        return shoppingListRepository.findById(id).map(ShoppingListDTO::new);
     }
 
     public ShoppingList save(ShoppingList shoppingList) {

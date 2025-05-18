@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.myrecipes.backend.dto.ShoppingListItemDTO;
 import com.myrecipes.backend.entity.ShoppingListItem;
 import com.myrecipes.backend.repository.ShoppingListItemRepository;
 
@@ -15,8 +16,10 @@ public class ShoppingListItemService {
         this.shoppingListItemRepository = shoppingListItemRepository;
     }
 
-    public List<ShoppingListItem> getAll() {
-        return shoppingListItemRepository.findAll();
+    public List<ShoppingListItemDTO> getAll() {
+        return shoppingListItemRepository.findAll().stream()
+                .map(ShoppingListItemDTO::new)
+                .toList();
     }
 
     public ShoppingListItem save(ShoppingListItem item) {
