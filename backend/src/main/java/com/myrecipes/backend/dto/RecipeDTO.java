@@ -7,19 +7,19 @@ import com.myrecipes.backend.entity.Recipe;
 public class RecipeDTO {
     private Long id;
     private String title;
-    private String description;
+    private String category;
     private Integer prepTime;
     private String imageUrl;
-    private boolean isFavorite;
+    private Boolean isFavorite;
     private OffsetDateTime createdAt;
 
     public RecipeDTO(Recipe recipe) {
         this.id = recipe.getId();
         this.title = recipe.getTitle();
-        this.description = recipe.getDescription();
+        this.category = recipe.getCategory();
         this.prepTime = recipe.getPrepTime();
         this.imageUrl = recipe.getImageUrl();
-        this.isFavorite = recipe.isFavorite();
+        this.isFavorite = recipe.getIsFavorite();
         this.createdAt = recipe.getCreatedAt();
     }
 
@@ -39,12 +39,12 @@ public class RecipeDTO {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategory(String description) {
+        this.category = description;
     }
 
     public Integer getPrepTime() {

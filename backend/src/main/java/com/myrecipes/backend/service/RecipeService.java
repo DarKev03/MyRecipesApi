@@ -40,4 +40,15 @@ public class RecipeService {
     public void deleteRecipe(Long id) {
         recipeRepository.deleteById(id);
     }
+
+    public Recipe updateRecipe(Recipe updatedRecipe) {
+        Recipe existingRecipe = recipeRepository.findById(updatedRecipe.getId())
+                .orElseThrow(() -> new RuntimeException("Recipe not found"));
+        existingRecipe.setTitle(updatedRecipe.getTitle());
+        existingRecipe.setCategory(updatedRecipe.getCategory());
+        existingRecipe.setPrepTime(updatedRecipe.getPrepTime());
+        existingRecipe.setImageUrl(updatedRecipe.getImageUrl());
+        existingRecipe.setIsFavorite(updatedRecipe.getIsFavorite());
+        return recipeRepository.save(existingRecipe);
+    }
 }

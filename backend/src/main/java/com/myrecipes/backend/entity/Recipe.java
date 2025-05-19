@@ -31,7 +31,7 @@ public class Recipe {
     private String title;
 
     @Column(nullable = false)
-    private String description;
+    private String category;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "instructions")
@@ -47,7 +47,7 @@ public class Recipe {
     private String imageUrl;
 
     @Column(name = "is_favorite")
-    private boolean isFavorite;
+    private Boolean isFavorite;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private List<RecipeIngredient> ingredients;
