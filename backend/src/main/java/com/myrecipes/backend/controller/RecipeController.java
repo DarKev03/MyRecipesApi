@@ -51,4 +51,9 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable Long id) {
         recipeService.deleteRecipe(id);
     }
+
+    @PostMapping("/update")
+    public Recipe updateRecipe(@RequestBody Recipe updatedRecipe) {
+        return recipeService.updateRecipe(updatedRecipe);
+    }    
 }
