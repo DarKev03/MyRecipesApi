@@ -22,8 +22,9 @@ public class ShoppingListItemService {
                 .toList();
     }
 
-    public ShoppingListItem save(ShoppingListItem item) {
-        return shoppingListItemRepository.save(item);
+    public ShoppingListItemDTO save(ShoppingListItem item) {
+        ShoppingListItem shoppingListItemSaved = shoppingListItemRepository.save(item);
+        return new ShoppingListItemDTO(shoppingListItemSaved);
     }
 
     public void delete(Long id) {

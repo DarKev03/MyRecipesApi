@@ -33,9 +33,9 @@ public class InstructionService {
                 .toList();
     }
 
-    public Instruction saveInstruction(Instruction instruction) {
-
-        return instructionRepository.save(instruction);
+    public InstructionDTO saveInstruction(Instruction instruction) {
+        Instruction savedInstruction = instructionRepository.save(instruction);
+        return new InstructionDTO(savedInstruction);
     }
 
     public void deleteInstruction(Long id) {

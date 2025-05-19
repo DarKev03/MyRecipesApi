@@ -22,8 +22,9 @@ public class RecipeCalendarService {
                 .toList();
     }
 
-    public RecipeCalendar save(RecipeCalendar calendar) {
-        return calendarRepository.save(calendar);
+    public RecipeCalendarDTO save(RecipeCalendar calendar) {
+        RecipeCalendar recipeCalendarSaved = calendarRepository.save(calendar);
+        return new RecipeCalendarDTO(recipeCalendarSaved);
     }
 
     public void delete(Long id) {

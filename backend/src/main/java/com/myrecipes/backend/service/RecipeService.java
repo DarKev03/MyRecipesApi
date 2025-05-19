@@ -33,15 +33,16 @@ public class RecipeService {
                 .toList();
     }
 
-    public Recipe saveRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
+    public RecipeDTO saveRecipe(Recipe recipe) {
+        Recipe savedRecipe = recipeRepository.save(recipe);
+        return new RecipeDTO(savedRecipe);
     }
 
     public void deleteRecipe(Long id) {
         recipeRepository.deleteById(id);
     }
 
-    public Recipe updateRecipe(Recipe updatedRecipe) {
+    public RecipeDTO updateRecipe(Recipe updatedRecipe) {
         Recipe existingRecipe = recipeRepository.findById(updatedRecipe.getId())
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));
         existingRecipe.setTitle(updatedRecipe.getTitle());
@@ -49,6 +50,7 @@ public class RecipeService {
         existingRecipe.setPrepTime(updatedRecipe.getPrepTime());
         existingRecipe.setImageUrl(updatedRecipe.getImageUrl());
         existingRecipe.setIsFavorite(updatedRecipe.getIsFavorite());
-        return recipeRepository.save(existingRecipe);
+        Recipe newUpdatedRecipe = recipeRepository.save(existingRecipe);
+        return new RecipeDTO(newUpdatedRecipe);
     }
 }

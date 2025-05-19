@@ -32,7 +32,7 @@ public class InstructionController {
     }
 
     @PostMapping
-    public Instruction save(@RequestBody Instruction instruction) {
+    public InstructionDTO save(@RequestBody Instruction instruction) {
         return instructionService.saveInstruction(instruction);
     }
 

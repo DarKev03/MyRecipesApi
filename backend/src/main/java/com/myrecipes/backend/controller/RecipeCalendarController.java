@@ -32,7 +32,7 @@ public class RecipeCalendarController {
     }
 
     @PostMapping
-    public RecipeCalendar save(@RequestBody RecipeCalendar calendar) {
+    public RecipeCalendarDTO save(@RequestBody RecipeCalendar calendar) {
         return service.save(calendar);
     }
 

@@ -32,7 +32,7 @@ public class RecipeIngredientController {
     }
 
     @PostMapping
-    public RecipeIngredient save(@RequestBody RecipeIngredient ri) {
+    public RecipeIngredientDTO save(@RequestBody RecipeIngredient ri) {
         return service.save(ri);
     }
 

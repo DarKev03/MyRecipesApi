@@ -38,7 +38,7 @@ public class ShoppingListController {
     }
 
     @PostMapping
-    public ShoppingList save(@RequestBody ShoppingList list) {
+    public ShoppingListDTO save(@RequestBody ShoppingList list) {
         return shoppingListService.save(list);
     }
 

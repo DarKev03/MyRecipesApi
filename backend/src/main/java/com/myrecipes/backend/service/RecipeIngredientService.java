@@ -23,8 +23,10 @@ public class RecipeIngredientService {
     }
     
 
-    public RecipeIngredient save(RecipeIngredient ri) {
-        return recipeIngredientRepository.save(ri);
+    public RecipeIngredientDTO save(RecipeIngredient ri) {
+
+        RecipeIngredient riSaved = recipeIngredientRepository.save(ri);
+        return new RecipeIngredientDTO(riSaved);
     }
 
     public void delete(Long id) {

@@ -32,7 +32,7 @@ public class ShoppingListItemController {
     }
 
     @PostMapping
-    public ShoppingListItem save(@RequestBody ShoppingListItem item) {
+    public ShoppingListItemDTO save(@RequestBody ShoppingListItem item) {
         return service.save(item);
     }
 

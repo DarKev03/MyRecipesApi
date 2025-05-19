@@ -43,7 +43,7 @@ public class RecipeController {
     }
 
     @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe) {
+    public RecipeDTO createRecipe(@RequestBody Recipe recipe) {
         return recipeService.saveRecipe(recipe);
     }
 
@@ -53,7 +53,7 @@ public class RecipeController {
     }
 
     @PostMapping("/update")
-    public Recipe updateRecipe(@RequestBody Recipe updatedRecipe) {
+    public RecipeDTO updateRecipe(@RequestBody Recipe updatedRecipe) {
         return recipeService.updateRecipe(updatedRecipe);
     }    
 }

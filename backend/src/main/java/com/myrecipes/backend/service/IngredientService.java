@@ -27,14 +27,15 @@ public class IngredientService {
         return ingredientRepository.findById(id).map(IngredientDTO::new);
     }
 
-    public Ingredient saveIngredient(Ingredient ingredient) {
+    public IngredientDTO saveIngredient(Ingredient ingredient) {
         Optional<Ingredient> existing = ingredientRepository
                 .findAll()
                 .stream()
                 .filter(i -> i.getName().equalsIgnoreCase(ingredient.getName()))
                 .findFirst();
 
-        return existing.orElseGet(() -> ingredientRepository.save(ingredient));
+        Ingredient savedIngredient = existing.orElseGet(() -> ingredientRepository.save(ingredient));
+        return new IngredientDTO(savedIngredient);
     }
 
     public void deleteIngredient(Long id) {

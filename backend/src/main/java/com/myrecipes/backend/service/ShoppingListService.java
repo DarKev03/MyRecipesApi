@@ -27,8 +27,9 @@ public class ShoppingListService {
         return shoppingListRepository.findById(id).map(ShoppingListDTO::new);
     }
 
-    public ShoppingList save(ShoppingList shoppingList) {
-        return shoppingListRepository.save(shoppingList);
+    public ShoppingListDTO save(ShoppingList shoppingList) {
+        ShoppingList shoppingListSaved = shoppingListRepository.save(shoppingList);
+        return new ShoppingListDTO(shoppingListSaved);
     }
 
     public void delete(Long id) {
