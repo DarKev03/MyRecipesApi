@@ -63,11 +63,11 @@ public class RecipeDTO {
         this.imageUrl = imageUrl;
     }
 
-    public boolean isFavorite() {
+    public Boolean isFavorite() {
         return isFavorite;
     }
 
-    public void setFavorite(boolean isFavorite) {
+    public void setFavorite(Boolean isFavorite) {
         this.isFavorite = isFavorite;
     }
 
