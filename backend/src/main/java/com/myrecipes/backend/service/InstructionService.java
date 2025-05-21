@@ -43,7 +43,7 @@ public class InstructionService {
     }
 
     public List<InstructionDTO> getInstructionsByUserId(Long userId) {
-        return instructionRepository.findByUserId(userId).stream()
+        return instructionRepository.findByRecipe_User_Id(userId).stream()
                 .map(InstructionDTO::new)
                 .toList();
     }

@@ -8,5 +8,5 @@ import com.myrecipes.backend.entity.Instruction;
 
 public interface InstructionRepository extends JpaRepository<Instruction, Long> {
     List<Instruction> findByRecipeId(Long recipeId);
-    List<Instruction> findByUserId(Long userId);
+    List<Instruction> findByRecipe_User_Id(Long userId);
 }
