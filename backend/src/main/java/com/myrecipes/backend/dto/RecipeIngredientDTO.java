@@ -1,15 +1,20 @@
 package com.myrecipes.backend.dto;
+
 import com.myrecipes.backend.entity.RecipeIngredient;
 
 public class RecipeIngredientDTO {
     private String ingredientName;
+    private long recipeId;
     private Double quantity;
     private String unit;
+    private long userId;
 
     public RecipeIngredientDTO(RecipeIngredient recipeIngredient) {
         this.ingredientName = recipeIngredient.getIngredient().getName();
+        this.recipeId = recipeIngredient.getRecipe().getId();
         this.quantity = recipeIngredient.getQuantity();
         this.unit = recipeIngredient.getUnit();
+        this.userId = recipeIngredient.getRecipe().getUser().getId();
     }
 
     public String getIngredientName() {
@@ -34,5 +39,21 @@ public class RecipeIngredientDTO {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(long recipeId) {
+        this.recipeId = recipeId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

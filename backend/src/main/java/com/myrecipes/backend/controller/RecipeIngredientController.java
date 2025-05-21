@@ -40,4 +40,9 @@ public class RecipeIngredientController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    @GetMapping("/user/{userId}")
+    public List<RecipeIngredientDTO> getByUser(@PathVariable Long userId) {
+        return service.getByUserId(userId);
+    }
 }

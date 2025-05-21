@@ -32,4 +32,10 @@ public class RecipeIngredientService {
     public void delete(Long id) {
         recipeIngredientRepository.deleteById(id);
     }
+
+    public List<RecipeIngredientDTO> getByUserId(Long userId) {
+        return recipeIngredientRepository.findByUserId(userId).stream()
+            .map(RecipeIngredientDTO::new)
+            .toList();
+    }
 }

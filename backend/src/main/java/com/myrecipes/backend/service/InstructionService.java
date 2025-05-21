@@ -41,4 +41,10 @@ public class InstructionService {
     public void deleteInstruction(Long id) {
         instructionRepository.deleteById(id);
     }
+
+    public List<InstructionDTO> getInstructionsByUserId(Long userId) {
+        return instructionRepository.findByUserId(userId).stream()
+                .map(InstructionDTO::new)
+                .toList();
+    }
 }

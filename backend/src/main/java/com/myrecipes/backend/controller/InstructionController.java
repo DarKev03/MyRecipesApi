@@ -40,4 +40,9 @@ public class InstructionController {
     public void delete(@PathVariable Long id) {
         instructionService.deleteInstruction(id);
     }
+
+    @GetMapping("/user/{userId}")
+    public List<InstructionDTO> getByUser(@PathVariable Long userId) {
+        return instructionService.getInstructionsByUserId(userId);
+    }
 }

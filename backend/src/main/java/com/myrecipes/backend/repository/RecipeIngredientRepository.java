@@ -8,4 +8,5 @@ import com.myrecipes.backend.entity.RecipeIngredient;
 
 public interface RecipeIngredientRepository extends JpaRepository<RecipeIngredient, Long> {
     List<RecipeIngredient> findByRecipeId(Long recipeId);
+    List<RecipeIngredient> findByUserId(Long userId);
 }
