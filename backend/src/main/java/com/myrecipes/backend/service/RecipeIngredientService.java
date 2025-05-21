@@ -18,10 +18,9 @@ public class RecipeIngredientService {
 
     public List<RecipeIngredientDTO> getByRecipeId(Long recipeId) {
         return recipeIngredientRepository.findByRecipeId(recipeId).stream()
-            .map(RecipeIngredientDTO::new)
-            .toList();
+                .map(RecipeIngredientDTO::new)
+                .toList();
     }
-    
 
     public RecipeIngredientDTO save(RecipeIngredient ri) {
 
@@ -34,8 +33,8 @@ public class RecipeIngredientService {
     }
 
     public List<RecipeIngredientDTO> getByUserId(Long userId) {
-        return recipeIngredientRepository.findByUserId(userId).stream()
-            .map(RecipeIngredientDTO::new)
-            .toList();
+        return recipeIngredientRepository.findByRecipe_UserId(userId).stream()
+                .map(RecipeIngredientDTO::new)
+                .toList();
     }
 }
