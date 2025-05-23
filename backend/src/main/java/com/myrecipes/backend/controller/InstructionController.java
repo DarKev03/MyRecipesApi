@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myrecipes.backend.dto.InstructionDTO;
-import com.myrecipes.backend.entity.Instruction;
 import com.myrecipes.backend.service.InstructionService;
 
 @RestController
@@ -32,7 +31,7 @@ public class InstructionController {
     }
 
     @PostMapping
-    public InstructionDTO save(@RequestBody Instruction instruction) {
+    public InstructionDTO save(@RequestBody InstructionDTO instruction) {
         return instructionService.saveInstruction(instruction);
     }
 

@@ -4,6 +4,8 @@ import java.time.OffsetDateTime;
 
 import com.myrecipes.backend.entity.Ingredient;
 
+import lombok.NoArgsConstructor;
+@NoArgsConstructor
 public class IngredientDTO {
     private Long id;
     private String name;

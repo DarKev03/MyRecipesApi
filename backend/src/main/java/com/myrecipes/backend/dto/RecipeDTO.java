@@ -4,6 +4,8 @@ import java.time.OffsetDateTime;
 
 import com.myrecipes.backend.entity.Recipe;
 
+import lombok.NoArgsConstructor;
+@NoArgsConstructor
 public class RecipeDTO {
     private Long id;
     private String title;
@@ -12,6 +14,7 @@ public class RecipeDTO {
     private String imageUrl;
     private Boolean isFavorite;
     private OffsetDateTime createdAt;
+    private Long userId;
 
     public RecipeDTO(Recipe recipe) {
         this.id = recipe.getId();
@@ -21,6 +24,7 @@ public class RecipeDTO {
         this.imageUrl = recipe.getImageUrl();
         this.isFavorite = recipe.getIsFavorite();
         this.createdAt = recipe.getCreatedAt();
+        this.userId = recipe.getUser().getId();
     }
 
     public Long getId() {
@@ -63,11 +67,11 @@ public class RecipeDTO {
         this.imageUrl = imageUrl;
     }
 
-    public Boolean isFavorite() {
+    public Boolean getIsFavorite() {
         return isFavorite;
     }
 
-    public void setFavorite(Boolean isFavorite) {
+    public void setIsFavorite(Boolean isFavorite) {
         this.isFavorite = isFavorite;
     }
 
@@ -77,6 +81,14 @@ public class RecipeDTO {
 
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
 }

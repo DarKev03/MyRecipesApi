@@ -2,6 +2,8 @@ package com.myrecipes.backend.dto;
 
 import com.myrecipes.backend.entity.Instruction;
 
+import lombok.NoArgsConstructor;
+@NoArgsConstructor
 public class InstructionDTO {
     private Long id;
     private String text;

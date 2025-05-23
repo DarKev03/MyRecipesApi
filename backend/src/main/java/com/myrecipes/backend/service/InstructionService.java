@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 import com.myrecipes.backend.dto.InstructionDTO;
 import com.myrecipes.backend.entity.Instruction;
 import com.myrecipes.backend.repository.InstructionRepository;
+import com.myrecipes.backend.repository.RecipeRepository;
 
 @Service
 public class InstructionService {
     private final InstructionRepository instructionRepository;
+    private final RecipeRepository recipeRepository;
 
-    public InstructionService(InstructionRepository instructionRepository) {
+    public InstructionService(InstructionRepository instructionRepository, RecipeRepository recipeRepository) {
         this.instructionRepository = instructionRepository;
+        this.recipeRepository = recipeRepository;
     }
 
     public List<InstructionDTO> getAllInstructions() {
@@ -33,8 +36,12 @@ public class InstructionService {
                 .toList();
     }
 
-    public InstructionDTO saveInstruction(Instruction instruction) {
-        Instruction savedInstruction = instructionRepository.save(instruction);
+    public InstructionDTO saveInstruction(InstructionDTO instruction) {
+        Instruction savedInstruction = new Instruction();
+        savedInstruction.setText(instruction.getText());
+        savedInstruction.setRecipe(recipeRepository.findById(instruction.getRecipeId()).get());
+
+        savedInstruction = instructionRepository.save(savedInstruction);
         return new InstructionDTO(savedInstruction);
     }
 

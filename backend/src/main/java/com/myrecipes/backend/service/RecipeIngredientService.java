@@ -6,14 +6,21 @@ import org.springframework.stereotype.Service;
 
 import com.myrecipes.backend.dto.RecipeIngredientDTO;
 import com.myrecipes.backend.entity.RecipeIngredient;
+import com.myrecipes.backend.repository.IngredientRepository;
 import com.myrecipes.backend.repository.RecipeIngredientRepository;
+import com.myrecipes.backend.repository.RecipeRepository;
 
 @Service
 public class RecipeIngredientService {
     private final RecipeIngredientRepository recipeIngredientRepository;
+    private final RecipeRepository recipeRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public RecipeIngredientService(RecipeIngredientRepository recipeIngredientRepository) {
+    public RecipeIngredientService(RecipeIngredientRepository recipeIngredientRepository,
+            RecipeRepository recipeRepository) {
         this.recipeIngredientRepository = recipeIngredientRepository;
+        this.recipeRepository = recipeRepository;
+        this.ingredientRepository = null;
     }
 
     public List<RecipeIngredientDTO> getByRecipeId(Long recipeId) {
@@ -22,9 +29,13 @@ public class RecipeIngredientService {
                 .toList();
     }
 
-    public RecipeIngredientDTO save(RecipeIngredient ri) {
-
-        RecipeIngredient riSaved = recipeIngredientRepository.save(ri);
+    public RecipeIngredientDTO save(RecipeIngredientDTO ri) {
+        RecipeIngredient riSaved = new RecipeIngredient();
+        riSaved.setRecipe(recipeRepository.findById(ri.getRecipeId()).get());
+        riSaved.setIngredient(ingredientRepository.findById(ri.getIngredientId()).get());
+        riSaved.setQuantity(ri.getQuantity());
+        riSaved.setUnit(ri.getUnit());
+        riSaved = recipeIngredientRepository.save(riSaved);
         return new RecipeIngredientDTO(riSaved);
     }
 

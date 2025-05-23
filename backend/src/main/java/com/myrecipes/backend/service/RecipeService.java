@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.myrecipes.backend.dto.RecipeDTO;
 import com.myrecipes.backend.entity.Recipe;
+import com.myrecipes.backend.entity.User;
 import com.myrecipes.backend.repository.RecipeRepository;
+import com.myrecipes.backend.repository.UserRepository;
 
 @Service
 public class RecipeService {
+    private final UserRepository userRepository;
     private final RecipeRepository recipeRepository;
 
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository) {
+        this.userRepository = userRepository;
         this.recipeRepository = recipeRepository;
     }
 
@@ -33,8 +37,21 @@ public class RecipeService {
                 .toList();
     }
 
-    public RecipeDTO saveRecipe(Recipe recipe) {
+    public RecipeDTO saveRecipe(RecipeDTO recipeDto) {
+        User user = userRepository.findById(recipeDto.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Recipe recipe = new Recipe();
+        recipe.setUser(user);
+        recipe.setTitle(recipeDto.getTitle());
+        recipe.setCategory(recipeDto.getCategory());
+        recipe.setImageUrl(recipeDto.getImageUrl());
+        recipe.setIsFavorite(recipeDto.getIsFavorite());
+        recipe.setPrepTime(recipeDto.getPrepTime());
+        recipe.setCreatedAt(recipeDto.getCreatedAt());
+
         Recipe savedRecipe = recipeRepository.save(recipe);
+
         return new RecipeDTO(savedRecipe);
     }
 
