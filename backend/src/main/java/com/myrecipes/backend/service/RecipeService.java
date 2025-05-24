@@ -54,12 +54,14 @@ public class RecipeService {
         recipe.setPrepTime(recipeDto.getPrepTime());
         recipe.setCreatedAt(OffsetDateTime.now());
 
-        return new RecipeDTO(recipeRepository.save(recipe));
+        return new RecipeDTO(recipeRepository.saveAndFlush(recipe));
     }
+
     @Transactional
     public void deleteRecipe(Long id) {
         recipeRepository.deleteById(id);
     }
+
     @Transactional
     public RecipeDTO updateRecipe(Recipe updatedRecipe) {
         Recipe existingRecipe = recipeRepository.findById(updatedRecipe.getId())
