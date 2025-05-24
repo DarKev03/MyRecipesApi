@@ -19,10 +19,10 @@ public class RecipeIngredientService {
     private final IngredientRepository ingredientRepository;
 
     public RecipeIngredientService(RecipeIngredientRepository recipeIngredientRepository,
-            RecipeRepository recipeRepository) {
+            RecipeRepository recipeRepository, IngredientRepository ingredientRepository) {
         this.recipeIngredientRepository = recipeIngredientRepository;
         this.recipeRepository = recipeRepository;
-        this.ingredientRepository = null;
+        this.ingredientRepository = ingredientRepository;
     }
 
     public List<RecipeIngredientDTO> getByRecipeId(Long recipeId) {
