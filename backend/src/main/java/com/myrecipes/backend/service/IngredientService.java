@@ -37,7 +37,7 @@ public class IngredientService {
         savedIngredient.setCreatedAt(ingredientDTO.getCreatedAt());
         savedIngredient.setCreatedAt(OffsetDateTime.now());
 
-        return new IngredientDTO(ingredientRepository.save(savedIngredient));
+        return new IngredientDTO(ingredientRepository.saveAndFlush(savedIngredient));
     }
     @Transactional
     public void deleteIngredient(Long id) {
