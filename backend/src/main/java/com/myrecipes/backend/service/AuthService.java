@@ -1,5 +1,7 @@
 package com.myrecipes.backend.service;
 
+import java.time.OffsetDateTime;
+
 import org.springframework.stereotype.Service;
 
 import com.myrecipes.backend.dto.UserDTO;
@@ -29,6 +31,9 @@ public class AuthService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("El email ya está registrado");
         }
+
+        user.setCreatedAt(OffsetDateTime.now());
+
         return new UserDTO(userRepository.save(user));
     }
 

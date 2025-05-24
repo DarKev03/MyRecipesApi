@@ -35,8 +35,9 @@ public class RecipeIngredientService {
         riSaved.setIngredient(ingredientRepository.findById(ri.getIngredientId()).get());
         riSaved.setQuantity(ri.getQuantity());
         riSaved.setUnit(ri.getUnit());
-        riSaved = recipeIngredientRepository.save(riSaved);
-        return new RecipeIngredientDTO(riSaved);
+                
+
+        return new RecipeIngredientDTO(recipeIngredientRepository.save(riSaved));
     }
 
     public void delete(Long id) {

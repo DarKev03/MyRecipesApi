@@ -1,5 +1,6 @@
 package com.myrecipes.backend.service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,11 +49,9 @@ public class RecipeService {
         recipe.setImageUrl(recipeDto.getImageUrl());
         recipe.setIsFavorite(recipeDto.getIsFavorite());
         recipe.setPrepTime(recipeDto.getPrepTime());
-        recipe.setCreatedAt(recipeDto.getCreatedAt());
+        recipe.setCreatedAt(OffsetDateTime.now());        
 
-        Recipe savedRecipe = recipeRepository.save(recipe);
-
-        return new RecipeDTO(savedRecipe);
+        return new RecipeDTO(recipeRepository.save(recipe));
     }
 
     public void deleteRecipe(Long id) {

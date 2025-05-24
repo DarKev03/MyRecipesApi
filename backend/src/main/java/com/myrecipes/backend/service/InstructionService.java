@@ -39,10 +39,9 @@ public class InstructionService {
     public InstructionDTO saveInstruction(InstructionDTO instruction) {
         Instruction savedInstruction = new Instruction();
         savedInstruction.setText(instruction.getText());
-        savedInstruction.setRecipe(recipeRepository.findById(instruction.getRecipeId()).get());
-
-        savedInstruction = instructionRepository.save(savedInstruction);
-        return new InstructionDTO(savedInstruction);
+        savedInstruction.setRecipe(recipeRepository.findById(instruction.getRecipeId()).get());        
+        
+        return new InstructionDTO(instructionRepository.save(savedInstruction));
     }
 
     public void deleteInstruction(Long id) {

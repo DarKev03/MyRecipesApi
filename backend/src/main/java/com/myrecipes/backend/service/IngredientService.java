@@ -1,5 +1,6 @@
 package com.myrecipes.backend.service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,8 +33,9 @@ public class IngredientService {
         savedIngredient.setName(ingredientDTO.getName());
         savedIngredient.setDescription(ingredientDTO.getDescription());
         savedIngredient.setCreatedAt(ingredientDTO.getCreatedAt());
-        savedIngredient = ingredientRepository.save(savedIngredient);
-        return new IngredientDTO(savedIngredient);
+        savedIngredient.setCreatedAt(OffsetDateTime.now());
+
+        return new IngredientDTO(ingredientRepository.save(savedIngredient));
     }
 
     public void deleteIngredient(Long id) {
