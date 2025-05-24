@@ -10,6 +10,8 @@ import com.myrecipes.backend.dto.UserDTO;
 import com.myrecipes.backend.entity.User;
 import com.myrecipes.backend.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UserService {
     @Autowired
@@ -25,10 +27,12 @@ public class UserService {
                 .toList();
     }
 
+    @Transactional
     public UserDTO saveUser(User user) {
         return new UserDTO(userRepository.save(user));
     }
 
+    @Transactional
     public Optional<UserDTO> updateUser(Long id, User user) {
         return userRepository.findById(id).map(existing -> {
             user.setId(id);
@@ -36,6 +40,7 @@ public class UserService {
         });
     }
 
+    @Transactional
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

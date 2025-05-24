@@ -12,6 +12,8 @@ import com.myrecipes.backend.entity.User;
 import com.myrecipes.backend.repository.RecipeRepository;
 import com.myrecipes.backend.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RecipeService {
     private final UserRepository userRepository;
@@ -38,6 +40,7 @@ public class RecipeService {
                 .toList();
     }
 
+    @Transactional
     public RecipeDTO saveRecipe(RecipeDTO recipeDto) {
         User user = userRepository.findById(recipeDto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -49,15 +52,15 @@ public class RecipeService {
         recipe.setImageUrl(recipeDto.getImageUrl());
         recipe.setIsFavorite(recipeDto.getIsFavorite());
         recipe.setPrepTime(recipeDto.getPrepTime());
-        recipe.setCreatedAt(OffsetDateTime.now());        
+        recipe.setCreatedAt(OffsetDateTime.now());
 
         return new RecipeDTO(recipeRepository.save(recipe));
     }
-
+    @Transactional
     public void deleteRecipe(Long id) {
         recipeRepository.deleteById(id);
     }
-
+    @Transactional
     public RecipeDTO updateRecipe(Recipe updatedRecipe) {
         Recipe existingRecipe = recipeRepository.findById(updatedRecipe.getId())
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));

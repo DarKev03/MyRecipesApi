@@ -10,6 +10,8 @@ import com.myrecipes.backend.entity.Instruction;
 import com.myrecipes.backend.repository.InstructionRepository;
 import com.myrecipes.backend.repository.RecipeRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class InstructionService {
     private final InstructionRepository instructionRepository;
@@ -35,7 +37,7 @@ public class InstructionService {
                 .map(InstructionDTO::new)
                 .toList();
     }
-
+@Transactional
     public InstructionDTO saveInstruction(InstructionDTO instruction) {
         Instruction savedInstruction = new Instruction();
         savedInstruction.setText(instruction.getText());
@@ -43,11 +45,11 @@ public class InstructionService {
         
         return new InstructionDTO(instructionRepository.save(savedInstruction));
     }
-
+    @Transactional
     public void deleteInstruction(Long id) {
         instructionRepository.deleteById(id);
     }
-
+    @Transactional
     public List<InstructionDTO> getInstructionsByUserId(Long userId) {
         return instructionRepository.findByRecipe_User_Id(userId).stream()
                 .map(InstructionDTO::new)

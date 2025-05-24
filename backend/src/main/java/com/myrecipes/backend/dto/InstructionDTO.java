@@ -15,7 +15,7 @@ public class InstructionDTO {
         this.text = instruction.getText();
         this.recipeId = instruction.getRecipe().getId();
         this.userId = instruction.getRecipe().getUser().getId();
-    }
+    }    
 
     public Long getId() {
         return id;

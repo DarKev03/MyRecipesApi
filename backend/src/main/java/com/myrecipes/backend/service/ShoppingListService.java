@@ -9,6 +9,8 @@ import com.myrecipes.backend.dto.ShoppingListDTO;
 import com.myrecipes.backend.entity.ShoppingList;
 import com.myrecipes.backend.repository.ShoppingListRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ShoppingListService {
     private final ShoppingListRepository shoppingListRepository;
@@ -27,11 +29,13 @@ public class ShoppingListService {
         return shoppingListRepository.findById(id).map(ShoppingListDTO::new);
     }
 
+    @Transactional
     public ShoppingListDTO save(ShoppingList shoppingList) {
         ShoppingList shoppingListSaved = shoppingListRepository.save(shoppingList);
         return new ShoppingListDTO(shoppingListSaved);
     }
 
+    @Transactional
     public void delete(Long id) {
         shoppingListRepository.deleteById(id);
     }

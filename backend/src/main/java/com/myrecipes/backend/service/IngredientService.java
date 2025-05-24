@@ -10,6 +10,8 @@ import com.myrecipes.backend.dto.IngredientDTO;
 import com.myrecipes.backend.entity.Ingredient;
 import com.myrecipes.backend.repository.IngredientRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
@@ -27,7 +29,7 @@ public class IngredientService {
     public Optional<IngredientDTO> getIngredientById(Long id) {
         return ingredientRepository.findById(id).map(IngredientDTO::new);
     }
-
+@Transactional
     public IngredientDTO saveIngredient(IngredientDTO ingredientDTO) {
         Ingredient savedIngredient = new Ingredient();
         savedIngredient.setName(ingredientDTO.getName());
@@ -37,7 +39,7 @@ public class IngredientService {
 
         return new IngredientDTO(ingredientRepository.save(savedIngredient));
     }
-
+    @Transactional
     public void deleteIngredient(Long id) {
         ingredientRepository.deleteById(id);
     }
