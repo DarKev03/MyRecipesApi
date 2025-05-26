@@ -9,12 +9,14 @@ public class RecipeCalendarDTO {
     private String recipeTitle;
     private LocalDate scheduledDate;
     private String notes;
+    private Long recipeId;
 
     public RecipeCalendarDTO(RecipeCalendar rc) {
         this.id = rc.getId();
         this.recipeTitle = rc.getRecipe().getTitle();
         this.scheduledDate = rc.getScheduledDate();
         this.notes = rc.getNotes();
+        this.recipeId = rc.getRecipe().getId();
     }
 
     public Long getId() {
@@ -47,6 +49,14 @@ public class RecipeCalendarDTO {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(Long recipeId) {
+        this.recipeId = recipeId;
     }
 
 }

@@ -7,15 +7,18 @@ import org.springframework.stereotype.Service;
 import com.myrecipes.backend.dto.RecipeCalendarDTO;
 import com.myrecipes.backend.entity.RecipeCalendar;
 import com.myrecipes.backend.repository.RecipeCalendarRepository;
+import com.myrecipes.backend.repository.RecipeRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class RecipeCalendarService {
     private final RecipeCalendarRepository calendarRepository;
+    private final RecipeRepository recipeRepository;
 
-    public RecipeCalendarService(RecipeCalendarRepository calendarRepository) {
+    public RecipeCalendarService(RecipeCalendarRepository calendarRepository, RecipeRepository recipeRepository) {
         this.calendarRepository = calendarRepository;
+        this.recipeRepository = recipeRepository;
     }
 
     public List<RecipeCalendarDTO> getAll() {
@@ -25,9 +28,12 @@ public class RecipeCalendarService {
     }
 
     @Transactional
-    public RecipeCalendarDTO save(RecipeCalendar calendar) {
-        RecipeCalendar recipeCalendarSaved = calendarRepository.save(calendar);
-        return new RecipeCalendarDTO(recipeCalendarSaved);
+    public RecipeCalendarDTO save(RecipeCalendarDTO calendar) {
+        RecipeCalendar recipeCalendarSaved = new RecipeCalendar();
+        recipeCalendarSaved.setNotes(calendar.getNotes());
+        recipeCalendarSaved.setScheduledDate(calendar.getScheduledDate());
+        recipeCalendarSaved.setRecipe(recipeRepository.findById(calendar.getRecipeId()).get());
+        return new RecipeCalendarDTO(calendarRepository.save(recipeCalendarSaved));
     }
 
     @Transactional
