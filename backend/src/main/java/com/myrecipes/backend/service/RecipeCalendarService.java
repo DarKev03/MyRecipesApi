@@ -9,6 +9,7 @@ import com.myrecipes.backend.entity.Recipe;
 import com.myrecipes.backend.entity.RecipeCalendar;
 import com.myrecipes.backend.repository.RecipeCalendarRepository;
 import com.myrecipes.backend.repository.RecipeRepository;
+import com.myrecipes.backend.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,10 +17,13 @@ import jakarta.transaction.Transactional;
 public class RecipeCalendarService {
     private final RecipeCalendarRepository calendarRepository;
     private final RecipeRepository recipeRepository;
+    private final UserRepository userRepository;
 
-    public RecipeCalendarService(RecipeCalendarRepository calendarRepository, RecipeRepository recipeRepository) {
+    public RecipeCalendarService(RecipeCalendarRepository calendarRepository, RecipeRepository recipeRepository,
+            UserRepository userRepository) {
         this.calendarRepository = calendarRepository;
         this.recipeRepository = recipeRepository;
+        this.userRepository = userRepository;
     }
 
     public List<RecipeCalendarDTO> getAll() {
@@ -34,6 +38,7 @@ public class RecipeCalendarService {
         recipeCalendarSaved.setNotes(calendar.getNotes());
         recipeCalendarSaved.setScheduledDate(calendar.getScheduledDate());
         recipeCalendarSaved.setRecipe(recipeRepository.findById(calendar.getRecipeId()).get());
+        recipeCalendarSaved.setUser(userRepository.findById(calendar.getUserId()).get());
         return new RecipeCalendarDTO(calendarRepository.save(recipeCalendarSaved));
     }
 

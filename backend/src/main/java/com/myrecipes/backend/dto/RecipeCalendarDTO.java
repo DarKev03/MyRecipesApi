@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 import com.myrecipes.backend.entity.RecipeCalendar;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class RecipeCalendarDTO {
     private Long id;
     private Long userId;
