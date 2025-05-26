@@ -40,4 +40,10 @@ public class RecipeCalendarService {
     public void delete(Long id) {
         calendarRepository.deleteById(id);
     }
+
+    public List<RecipeCalendarDTO> findByUser(Long userId) {
+        return calendarRepository.findByUserId(userId).stream()
+                .map(RecipeCalendarDTO::new)
+                .toList();
+    }
 }

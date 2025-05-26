@@ -6,6 +6,7 @@ import com.myrecipes.backend.entity.RecipeCalendar;
 
 public class RecipeCalendarDTO {
     private Long id;
+    private Long userId;
     private String recipeTitle;
     private LocalDate scheduledDate;
     private String notes;
@@ -13,6 +14,7 @@ public class RecipeCalendarDTO {
 
     public RecipeCalendarDTO(RecipeCalendar rc) {
         this.id = rc.getId();
+        this.userId = rc.getUser().getId();
         this.recipeTitle = rc.getRecipe().getTitle();
         this.scheduledDate = rc.getScheduledDate();
         this.notes = rc.getNotes();
@@ -57,6 +59,14 @@ public class RecipeCalendarDTO {
 
     public void setRecipeId(Long recipeId) {
         this.recipeId = recipeId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 }
