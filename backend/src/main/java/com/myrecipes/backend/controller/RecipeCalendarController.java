@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myrecipes.backend.dto.RecipeCalendarDTO;
-import com.myrecipes.backend.entity.RecipeCalendar;
 import com.myrecipes.backend.service.RecipeCalendarService;
+
 
 @RestController
 @RequestMapping("/api/calendar")
@@ -32,7 +32,7 @@ public class RecipeCalendarController {
     }
 
     @PostMapping
-    public RecipeCalendarDTO save(@RequestBody RecipeCalendar calendar) {
+    public RecipeCalendarDTO save(@RequestBody RecipeCalendarDTO calendar) {
         return service.save(calendar);
     }
 
@@ -40,4 +40,10 @@ public class RecipeCalendarController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    @GetMapping("/user/{userId}")
+    public List<RecipeCalendarDTO> findByUser(@PathVariable Long userId) {
+        return service.findByUser(userId);
+    }
+    
 }
