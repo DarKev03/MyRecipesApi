@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.myrecipes.backend.dto.RecipeCalendarDTO;
+import com.myrecipes.backend.entity.Recipe;
 import com.myrecipes.backend.entity.RecipeCalendar;
 import com.myrecipes.backend.repository.RecipeCalendarRepository;
 import com.myrecipes.backend.repository.RecipeRepository;
@@ -43,7 +44,15 @@ public class RecipeCalendarService {
 
     public List<RecipeCalendarDTO> findByUser(Long userId) {
         return calendarRepository.findByUserId(userId).stream()
-                .map(RecipeCalendarDTO::new)
+                .map(calendar -> {
+                    String recipeTitle = recipeRepository.findById(calendar.getRecipe().getId())
+                            .map(Recipe::getTitle)
+                            .orElse("Sin título");
+
+                    RecipeCalendarDTO dto = new RecipeCalendarDTO(calendar);
+                    dto.setRecipeTitle(recipeTitle);
+                    return dto;
+                })
                 .toList();
     }
 }
