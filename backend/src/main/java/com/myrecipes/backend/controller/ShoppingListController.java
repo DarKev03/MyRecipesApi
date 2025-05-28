@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myrecipes.backend.dto.ShoppingListDTO;
-import com.myrecipes.backend.entity.ShoppingList;
 import com.myrecipes.backend.service.ShoppingListService;
 
 @RestController
@@ -38,12 +37,17 @@ public class ShoppingListController {
     }
 
     @PostMapping
-    public ShoppingListDTO save(@RequestBody ShoppingList list) {
+    public ShoppingListDTO save(@RequestBody ShoppingListDTO list) {
         return shoppingListService.save(list);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         shoppingListService.delete(id);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<ShoppingListDTO> getByUserId(@PathVariable Long userId) {
+        return shoppingListService.getByUserId(userId);
     }
 }

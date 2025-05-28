@@ -6,19 +6,20 @@ import java.util.stream.Collectors;
 
 import com.myrecipes.backend.entity.ShoppingList;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class ShoppingListDTO {
     private Long id;
     private String name;
     private OffsetDateTime createdAt;
-    private List<ShoppingListItemDTO> items;
+    private Long userId;
 
     public ShoppingListDTO(ShoppingList list) {
         this.id = list.getId();
+        this.userId = list.getUser().getId();
         this.name = list.getName();
         this.createdAt = list.getCreatedAt();
-        this.items = list.getItems().stream()
-                .map(ShoppingListItemDTO::new)
-                .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -45,12 +46,12 @@ public class ShoppingListDTO {
         this.createdAt = createdAt;
     }
 
-    public List<ShoppingListItemDTO> getItems() {
-        return items;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setItems(List<ShoppingListItemDTO> items) {
-        this.items = items;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 }

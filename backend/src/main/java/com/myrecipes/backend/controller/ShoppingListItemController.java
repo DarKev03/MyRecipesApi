@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myrecipes.backend.dto.ShoppingListItemDTO;
-import com.myrecipes.backend.entity.ShoppingListItem;
 import com.myrecipes.backend.service.ShoppingListItemService;
 
 @RestController
@@ -32,8 +31,13 @@ public class ShoppingListItemController {
     }
 
     @PostMapping
-    public ShoppingListItemDTO save(@RequestBody ShoppingListItem item) {
+    public ShoppingListItemDTO save(@RequestBody ShoppingListItemDTO item) {
         return service.save(item);
+    }
+
+    @GetMapping("/shopping-list/{shoppingListId}")
+    public List<ShoppingListItemDTO> getByShoppingListId(@PathVariable Long shoppingListId) {
+        return service.getByShoppingListId(shoppingListId);
     }
 
     @DeleteMapping("/{id}")
