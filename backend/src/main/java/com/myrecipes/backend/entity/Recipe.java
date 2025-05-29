@@ -34,7 +34,6 @@ public class Recipe {
     private String category;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "instructions")
     private List<Instruction> instructions;
 
     @Column(name = "prep_time")
@@ -49,9 +48,9 @@ public class Recipe {
     @Column(name = "is_favorite")
     private Boolean isFavorite;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeIngredient> ingredients;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeCalendar> scheduled;
 }
