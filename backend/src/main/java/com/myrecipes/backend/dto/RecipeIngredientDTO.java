@@ -3,16 +3,19 @@ package com.myrecipes.backend.dto;
 import com.myrecipes.backend.entity.RecipeIngredient;
 
 import lombok.NoArgsConstructor;
+
 @NoArgsConstructor
 public class RecipeIngredientDTO {
+    private Long id;
     private String ingredientName;
-    private long ingredientId;
-    private long recipeId;
+    private Long ingredientId;
+    private Long recipeId;
     private Double quantity;
     private String unit;
-    private long userId;
+    private Long userId;
 
     public RecipeIngredientDTO(RecipeIngredient recipeIngredient) {
+        this.id = recipeIngredient.getId();
         this.ingredientName = recipeIngredient.getIngredient().getName();
         this.ingredientId = recipeIngredient.getIngredient().getId();
         this.recipeId = recipeIngredient.getRecipe().getId();
@@ -67,5 +70,13 @@ public class RecipeIngredientDTO {
 
     public void setIngredientId(long ingredientId) {
         this.ingredientId = ingredientId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
