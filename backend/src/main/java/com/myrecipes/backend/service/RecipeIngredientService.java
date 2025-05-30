@@ -1,15 +1,18 @@
 package com.myrecipes.backend.service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.myrecipes.backend.dto.RecipeIngredientDTO;
+import com.myrecipes.backend.entity.Ingredient;
 import com.myrecipes.backend.entity.RecipeIngredient;
 import com.myrecipes.backend.repository.IngredientRepository;
 import com.myrecipes.backend.repository.RecipeIngredientRepository;
 import com.myrecipes.backend.repository.RecipeRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -52,4 +55,27 @@ public class RecipeIngredientService {
                 .map(RecipeIngredientDTO::new)
                 .toList();
     }
+
+    @Transactional
+    public RecipeIngredientDTO update(RecipeIngredientDTO ri) {
+        Ingredient ingredient = ingredientRepository.findByName(ri.getIngredientName())
+                .orElseGet(() -> {
+                    Ingredient newIngredient = new Ingredient();
+                    newIngredient.setName(ri.getIngredientName());
+                    newIngredient.setDescription(null);
+                    newIngredient.setCreatedAt(OffsetDateTime.now());
+                    return ingredientRepository.save(newIngredient);
+                });
+
+        RecipeIngredient riToUpdate = recipeIngredientRepository.findById(ri.getId())
+                .orElseThrow(() -> new EntityNotFoundException("RecipeIngredient no encontrado con id: " + ri.getId()));
+
+        riToUpdate.setIngredient(ingredient);
+        riToUpdate.setQuantity(ri.getQuantity());
+        riToUpdate.setUnit(ri.getUnit());
+
+        RecipeIngredient saved = recipeIngredientRepository.save(riToUpdate);
+        return new RecipeIngredientDTO(saved);
+    }
+
 }

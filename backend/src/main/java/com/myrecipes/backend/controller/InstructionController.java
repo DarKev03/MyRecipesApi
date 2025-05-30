@@ -44,4 +44,9 @@ public class InstructionController {
     public List<InstructionDTO> getByUser(@PathVariable Long userId) {
         return instructionService.getInstructionsByUserId(userId);
     }
+
+    @PostMapping("/update")
+    public InstructionDTO update(@RequestBody InstructionDTO instruction) {
+        return instructionService.saveInstruction(instruction);
+    }
 }

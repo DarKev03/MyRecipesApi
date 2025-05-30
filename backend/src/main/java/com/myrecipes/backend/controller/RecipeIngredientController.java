@@ -44,4 +44,9 @@ public class RecipeIngredientController {
     public List<RecipeIngredientDTO> getByUser(@PathVariable Long userId) {
         return service.getByUserId(userId);
     }
+
+    @PostMapping("/update")
+    public RecipeIngredientDTO update(@RequestBody RecipeIngredientDTO ri) {
+        return service.update(ri);
+    }
 }

@@ -37,22 +37,34 @@ public class InstructionService {
                 .map(InstructionDTO::new)
                 .toList();
     }
-@Transactional
+
+    @Transactional
     public InstructionDTO saveInstruction(InstructionDTO instruction) {
         Instruction savedInstruction = new Instruction();
         savedInstruction.setText(instruction.getText());
-        savedInstruction.setRecipe(recipeRepository.findById(instruction.getRecipeId()).get());        
-        
+        savedInstruction.setRecipe(recipeRepository.findById(instruction.getRecipeId()).get());
+
         return new InstructionDTO(instructionRepository.save(savedInstruction));
     }
+
     @Transactional
     public void deleteInstruction(Long id) {
         instructionRepository.deleteById(id);
     }
+
     @Transactional
     public List<InstructionDTO> getInstructionsByUserId(Long userId) {
         return instructionRepository.findByRecipe_User_Id(userId).stream()
                 .map(InstructionDTO::new)
                 .toList();
+    }
+
+    @Transactional
+    public InstructionDTO updateInstruction(InstructionDTO instruction) {
+        Instruction instructionUpdated = new Instruction();
+        instructionUpdated.setId(instruction.getId());
+        instructionUpdated.setText(instruction.getText());
+        instructionUpdated.setRecipe(recipeRepository.findById(instruction.getRecipeId()).orElseThrow());
+        return new InstructionDTO(instructionRepository.save(instructionUpdated));
     }
 }
