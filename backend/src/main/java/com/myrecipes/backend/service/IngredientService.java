@@ -29,16 +29,23 @@ public class IngredientService {
     public Optional<IngredientDTO> getIngredientById(Long id) {
         return ingredientRepository.findById(id).map(IngredientDTO::new);
     }
-@Transactional
-    public IngredientDTO saveIngredient(IngredientDTO ingredientDTO) {
-        Ingredient savedIngredient = new Ingredient();
-        savedIngredient.setName(ingredientDTO.getName());
-        savedIngredient.setDescription(ingredientDTO.getDescription());
-        savedIngredient.setCreatedAt(ingredientDTO.getCreatedAt());
-        savedIngredient.setCreatedAt(OffsetDateTime.now());
 
-        return new IngredientDTO(ingredientRepository.saveAndFlush(savedIngredient));
+    @Transactional
+    public IngredientDTO saveIngredient(IngredientDTO ingredientDTO) {
+        Optional<Ingredient> existing = ingredientRepository.findByName(ingredientDTO.getName());
+
+        if (existing.isPresent()) {
+            return new IngredientDTO(existing.get());
+        } else {
+            Ingredient savedIngredient = new Ingredient();
+            savedIngredient.setName(ingredientDTO.getName());
+            savedIngredient.setDescription(ingredientDTO.getDescription());
+            savedIngredient.setCreatedAt(OffsetDateTime.now());
+
+            return new IngredientDTO(ingredientRepository.saveAndFlush(savedIngredient));
+        }
     }
+
     @Transactional
     public void deleteIngredient(Long id) {
         ingredientRepository.deleteById(id);
