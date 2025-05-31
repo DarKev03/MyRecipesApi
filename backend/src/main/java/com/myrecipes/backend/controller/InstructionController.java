@@ -47,6 +47,6 @@ public class InstructionController {
 
     @PostMapping("/update")
     public InstructionDTO update(@RequestBody InstructionDTO instruction) {
-        return instructionService.saveInstruction(instruction);
+        return instructionService.updateInstruction(instruction);
     }
 }
