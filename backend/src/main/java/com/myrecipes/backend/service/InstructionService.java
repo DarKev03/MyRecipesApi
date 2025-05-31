@@ -10,6 +10,7 @@ import com.myrecipes.backend.entity.Instruction;
 import com.myrecipes.backend.repository.InstructionRepository;
 import com.myrecipes.backend.repository.RecipeRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -61,10 +62,14 @@ public class InstructionService {
 
     @Transactional
     public InstructionDTO updateInstruction(InstructionDTO instruction) {
-        Instruction instructionUpdated = new Instruction();
-        instructionUpdated.setId(instruction.getId());
-        instructionUpdated.setText(instruction.getText());
-        instructionUpdated.setRecipe(recipeRepository.findById(instruction.getRecipeId()).orElseThrow());
-        return new InstructionDTO(instructionRepository.save(instructionUpdated));
+        Instruction instructionEntity = instructionRepository.findById(instruction.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Instruction not found"));
+
+        instructionEntity.setText(instruction.getText());
+        instructionEntity.setRecipe(recipeRepository.findById(instruction.getRecipeId())
+                .orElseThrow(() -> new EntityNotFoundException("Recipe not found")));
+
+        return new InstructionDTO(instructionRepository.save(instructionEntity));
     }
+
 }
